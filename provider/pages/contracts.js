@@ -1,8 +1,6 @@
-import getConfig from "next/config";
+import getConfig from 'next/config';
 
-function Contracts({ authData, contracts }) {
-  console.log(authData);
-  console.log(contracts);
+function Contracts({ contracts }) {
   return (
     <>
       <h1>Contratos</h1>
@@ -16,18 +14,18 @@ function Contracts({ authData, contracts }) {
 const { publicRuntimeConfig } = getConfig();
 
 const logininfo = {
-  identifier: "santacecilia",
-  password: "teste123",
+  identifier: 'santacecilia',
+  password: 'teste123',
 };
 
 export async function getServerSideProps() {
   const login = await fetch(
     `${publicRuntimeConfig.STRAPI_API_URL}/auth/local`,
     {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(logininfo),
     }
