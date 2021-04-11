@@ -80,12 +80,6 @@ function Index() {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />
-              <a
-                className="inline-block align-baseline text-sm text-gray-600 hover:text-gray-800"
-                href="/forgot"
-              >
-                Esqueceu a senha?
-              </a>
             </div>
             <div className="flex w-full mt-8">
               <button
