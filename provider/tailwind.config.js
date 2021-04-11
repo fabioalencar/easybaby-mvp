@@ -49,5 +49,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require('tailwindcss-animations')],
+  plugins: [require('@tailwindcss/forms'), require('tailwindcss-animations')],
 };
