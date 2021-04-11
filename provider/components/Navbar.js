@@ -1,28 +1,20 @@
 import React from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import getConfig from 'next/config';
+import { destroyCookie } from 'nookies';
 
 const { publicRuntimeConfig } = getConfig();
 
-function ActiveLink({ children, href }) {
-  const router = useRouter();
-  const style =
-    router.pathname === href
-      ? 'px-3 py-2 rounded-full text-sm font-medium text-white bg-secondary-100'
-      : 'px-3 py-2 rounded-full text-sm font-medium text-gray-500 hover:text-white hover:bg-gray-700';
+const handleLogout = () => {
+  const logout = destroyCookie(null, 'user', {
+    path: '/',
+  });
+  if (logout) {
+    Router.push('/');
+  }
+};
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    router.push(href);
-  };
-
-  return (
-    <a href={href} onClick={handleClick} className={style}>
-      {children}
-    </a>
-  );
-}
 export default function Navbar({ user }) {
   return (
     <nav className="bg-white">
@@ -46,9 +38,10 @@ export default function Navbar({ user }) {
                     alt={user.username}
                   />
                 </div>
-                <a
-                  href="/api/logout"
+                <button
                   className="bg-primary-100 p-1 rounded-full text-gray-50 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                  type="button"
+                  onClick={() => handleLogout()}
                 >
                   <svg
                     className="h-8 w-8 p-1"
@@ -64,7 +57,7 @@ export default function Navbar({ user }) {
                       d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                     />
                   </svg>
-                </a>
+                </button>
               </div>
             </div>
           )}

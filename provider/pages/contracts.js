@@ -1,6 +1,7 @@
 import getConfig from 'next/config';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { parseCookies } from 'nookies';
 
 function Contracts({ authData, contracts }) {
   const { user } = authData;
@@ -29,29 +30,13 @@ function Contracts({ authData, contracts }) {
 
 const { publicRuntimeConfig } = getConfig();
 
-const logininfo = {
-  identifier: 'santacecilia',
-  password: 'teste123',
-};
-
-export async function getServerSideProps() {
-  const login = await fetch(
-    `${publicRuntimeConfig.STRAPI_API_URL}/auth/local`,
-    {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(logininfo),
-    }
-  );
-
-  const loginResponse = await login.json();
+export async function getServerSideProps(ctx) {
+  const cookie = parseCookies(ctx).user;
+  const userData = cookie != undefined ? JSON.parse(cookie) : false;
 
   const res = await fetch(`${publicRuntimeConfig.STRAPI_API_URL}/maternities`, {
     headers: {
-      Authorization: `Bearer ${loginResponse.jwt}`,
+      Authorization: `Bearer ${userData.jwt}`,
     },
   });
 
@@ -60,7 +45,7 @@ export async function getServerSideProps() {
   return {
     props: {
       contracts: contracts,
-      authData: loginResponse,
+      authData: userData,
     },
   };
 }
