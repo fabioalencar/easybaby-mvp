@@ -26,14 +26,18 @@ function Index() {
     );
 
     const loginResponse = await login.json();
+    
+    console.log('Aqui3!'+JSON.stringify(loginResponse.jwt));
 
     const cookieToken = setCookie(null, 'user', JSON.stringify(loginResponse), {
       maxAge: 30 * 24 * 60 * 60,
       path: '/',
     });
 
-    if (cookieToken) {
+    if (JSON.stringify(loginResponse.jwt)) {
       Router.push('/contracts');
+    }else{
+      window.alert("Usuário inválido!");
     }
   };
 
@@ -46,14 +50,13 @@ function Index() {
         height={106}
         className="mx-auto h-18 w-auto p-4"
       />
-      <div className="container max-w-md mx-auto xl:max-w-3xl h-full flex bg-white rounded-lg shadow overflow-hidden">
-        <div className="w-full xl:w-1/2 p-8">
-          <form method="post" action="#">
+      <div className="container max-w-md mx-auto xl:max-w-1xl h-full flex bg-white rounded-lg shadow overflow-hidden">
+        <div className="w-full xl:w-1/1 p-8" align="center">
+          <form method="post" action="#" align="center">
             <div className="mb-4 mt-6">
               <label
                 className="block text-secondary-100  text-sm font-semibold mb-2"
-                htmlFor="email"
-              >
+                htmlFor="email"             >
                 Usuário
               </label>
               <input
