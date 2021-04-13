@@ -2,17 +2,26 @@ import getConfig from 'next/config';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { parseCookies } from 'nookies';
-//import Router from 'next/router';
 
-function contractForm({ authData, contracts, cId }){ //TO-DO: tornar o formulário editável, não entendi o que eu fiz de errado :(
-    const cookie = parseCookies().user;
+function contractForm({ authData, contracts, contractId }){ //TO-DO: tornar o formulário editável, não entendi o que eu fiz de errado :(
+    
+  console.log('contractId: '+contractId);
+  const cookie = parseCookies().user;
     const userData = cookie != undefined ? JSON.parse(cookie) : false;
+
+    
+
+    const contrato = JSON.stringify(contracts);
+
+
+    console.log('Contrato aqui! > '+contracts[0].id);
+
     /*const res = fetch(`${publicRuntimeConfig.STRAPI_API_URL}/contracts/1`, {
         headers: {
           Authorization: `Bearer ${userData.jwt}`,
         },
       });*/
-    console.log('AQUI 2! '+JSON.stringify(contracts.id));
+    //console.log('AQUI 2! '+JSON.stringify(contract.id));
     const { user } = authData;
     return (
       <div className="flex flex-col h-screen justify-between bg-gray-100">
@@ -41,7 +50,6 @@ function contractForm({ authData, contracts, cId }){ //TO-DO: tornar o formulár
                 className="text-sm bg-gray-100 appearance-none rounded w-full border-gray-300 py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10"
                 id="id-contrato"
                 type="text"
-                placeholder="Insira sua senha"
                 value={contracts.id}/></td>
               </tr>
 
@@ -70,7 +78,7 @@ function contractForm({ authData, contracts, cId }){ //TO-DO: tornar o formulár
                 className="text-sm bg-gray-100 appearance-none rounded w-full border-gray-300 py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10"
                 id="nome-contrato"
                 type="text"
-                value={contracts.plan.TITLE}/></td>
+                value={contrato.plan}/></td>
               </tr>
 
               <tr>
@@ -84,7 +92,7 @@ function contractForm({ authData, contracts, cId }){ //TO-DO: tornar o formulár
                 className="text-sm bg-gray-100 appearance-none rounded w-full border-gray-300 py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10"
                 id="nome-contrato"
                 type="text"
-                value={contracts.customer.NAME}/></td>
+                value={contrato.customer}/></td>
               </tr>
               <div className="flex w-full mt-8">
               <button
@@ -114,7 +122,7 @@ function contractForm({ authData, contracts, cId }){ //TO-DO: tornar o formulár
     const cookie = parseCookies(ctx).user;
     const userData = cookie != undefined ? JSON.parse(cookie) : false;
   
-    const res = await fetch(`${publicRuntimeConfig.STRAPI_API_URL}/contracts/1`, { //TO-DO: passar o id do contrato como parâmetro para consulta
+    const res = await fetch(`${publicRuntimeConfig.STRAPI_API_URL}/contracts`, { //TO-DO: passar o id do contrato como parâmetro para consulta
       headers: {
         Authorization: `Bearer ${userData.jwt}`,
       },
@@ -125,9 +133,31 @@ function contractForm({ authData, contracts, cId }){ //TO-DO: tornar o formulár
     return {
       props: {
         contracts: contracts,
-        authData: userData,
+        authData: userData
       },
     };
   }
+
+  /*export async function getStaticPaths() {
+    const maternities = await fetchAPI('/contracts');
+  
+    return {
+      paths: maternities.map((contracts) => ({
+        params: {
+          id: contract.id,
+        },
+      })),
+      fallback: false,
+    };
+  }
+  
+  export async function getStaticProps({ params }) {
+    const contracts = await fetchAPI(`/contracts/${params.id}`);
+    console.log('C:'+contracts);
+    return {
+      props: { contract: contracts[0] },
+      revalidate: 1,
+    };
+  }*/
 
   export default contractForm;

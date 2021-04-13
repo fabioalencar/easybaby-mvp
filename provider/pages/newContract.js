@@ -3,7 +3,6 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { parseCookies } from 'nookies';
 import { useState } from 'react';
-import { setCookie } from 'nookies';
 import Router from 'next/router';
 
 function newContract({ authData, contracts, cId }){ //TO-DO: tornar o formulário editável, não entendi o que eu fiz de errado :(
@@ -39,13 +38,9 @@ function newContract({ authData, contracts, cId }){ //TO-DO: tornar o formulári
         
         console.log('Aqui3!'+JSON.stringify(contractResponse));
     
-        const cookieToken = setCookie(null, 'user', JSON.stringify(contractResponse), {
-          maxAge: 30 * 24 * 60 * 60,
-          path: '/',
-        });
-    
-        if (cookieToken) {
-          Router.push('/contractForm');
+        if (contractResponse) {
+          window.alert("Contrato criado!");
+          Router.push('/contracts');
         }else{
           window.alert("Erro na chamada!");
         }
@@ -76,20 +71,6 @@ function newContract({ authData, contracts, cId }){ //TO-DO: tornar o formulári
             <>
             <form method="post" action="#" align="center"> 
             <table>
-            <tr>
-                <td><label
-                className="block text-secondary-100  text-sm font-semibold mb-2"
-              >
-                Id do Contrato: 
-              </label></td>
-              <td> <input
-                className="text-sm bg-gray-100 appearance-none rounded w-full border-gray-300 py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10"
-                id="id-contrato"
-                type="text"
-                placeholder="Id do contrato"
-                readOnly="true"/></td>
-              </tr>
-
               <tr>
                 <td><label
                 className="block text-secondary-100  text-sm font-semibold mb-2"
