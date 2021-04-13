@@ -4,27 +4,33 @@ import Footer from '../components/Footer';
 import { parseCookies } from 'nookies';
 import Router from 'next/router';
 
+<<<<<<< HEAD
 function Contracts({ authData, contracts}) {
 
+=======
+function Contracts({ authData, contracts }) {
+  console.log(contracts);
+>>>>>>> f8c420b109d6407c6f775c60720b9e85a0713e5f
   const handleNewForm = (authData, contract) => {
-    
-
     if (true) {
       Router.push('/newContract');
     }
   };
 
   const handleOpenForm = (authData, contract) => {
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> f8c420b109d6407c6f775c60720b9e85a0713e5f
     if (true) {
       Router.push('/contractForm');
     }
   };
 
   const { user } = authData;
-  console.log('AQUI! '+JSON.stringify(contracts));
-  return ( //TO-DO: formatar essa tabela!
+  console.log('AQUI! ' + JSON.stringify(contracts));
+  return (
     <div className="flex flex-col h-screen justify-between bg-gray-100">
       <header className=" px-2 sm:px-4 lg:px-4 bg-white shadow mb-8">
         <Navbar user={user} />
@@ -38,41 +44,49 @@ function Contracts({ authData, contracts}) {
       </header>
 
       <main className="max-w-5xl mx-auto px-4 p-20 sm:px-6 lg:px-8 bg-white">
-      <table>
-        <tr>
-          <th>Nome do contrato |</th><th>Nome do plano |</th><th>Nome do paciente</th>
-        </tr>
-      </table>
+        <table>
+          <tr>
+            <th>Nome do contrato |</th>
+            <th>Nome do plano |</th>
+            <th>Nome do paciente</th>
+          </tr>
+        </table>
         {contracts.map((contract) => (
           <>
-          <table>
-            <tr>
-            <td>
-            <button //className="w-full bg-primary-100 hover:bg-primary-50 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
-            onClick={() => handleOpenForm(authData, contract)}
-            >
-            <div key={contract.id}>{contract.name}|</div>
-            </button>
-            
-            </td>
-            
-            <td><div key={contract.id}>{contract.plan.TITLE}|</div></td>
-            <td><div key={contract.id}>{contract.customer.NAME}</div></td>
-            </tr>
-            
-          </table>
+            <table>
+              <tr>
+                <td>
+                  <button //className="w-full bg-primary-100 hover:bg-primary-50 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
+                    onClick={() => handleOpenForm(authData, contract)}
+                  >
+                    <div key={contract.id}>{contract.name}|</div>
+                  </button>
+                </td>
 
+                <td>
+                  <div key={contract.id}>{contract.plan.TITLE}|</div>
+                </td>
+                <td>
+                  <div key={contract.id}>{contract.customer.NAME}</div>
+                </td>
+              </tr>
+            </table>
           </>
         ))}
         <table>
-        <tr><td><div className="flex w-full mt-8">
-              <button
-                className="w-full bg-primary-100 hover:bg-primary-50 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
-                type="button"
-                onClick={() => handleNewForm(authData, contracts)}
-              >
-                Novo contrato
-              </button></div></td></tr>
+          <tr>
+            <td>
+              <div className="flex w-full mt-8">
+                <button
+                  className="w-full bg-primary-100 hover:bg-primary-50 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
+                  type="button"
+                  onClick={() => handleNewForm(authData, contracts)}
+                >
+                  Novo contrato
+                </button>
+              </div>
+            </td>
+          </tr>
         </table>
       </main>
 
@@ -199,8 +213,6 @@ function Contracts({ authData, contracts}) {
     </div>
   );
 }
-
-
 
 const { publicRuntimeConfig } = getConfig();
 
