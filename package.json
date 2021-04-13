@@ -1,0 +1,8 @@
+{
+  "name": "easybaby-mvp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/fabioalencar/easybaby-mvp.git",
+  "author": "rafaelxbs <rafaxbs@gmail.com>",
+  "license": "MIT"
+}

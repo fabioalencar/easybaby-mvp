@@ -4,11 +4,6 @@ import Footer from '../components/Footer';
 import { parseCookies } from 'nookies';
 import Router from 'next/router';
 
-<<<<<<< HEAD
-function Contracts({ authData, contracts }) {
-  const { user } = authData;
-  console.log(contracts);
-=======
 function Contracts({ authData, contracts}) {
 
   const handleNewForm = (authData, contract) => {
@@ -21,7 +16,6 @@ function Contracts({ authData, contracts}) {
 
   const handleOpenForm = (authData, contract) => {
     
->>>>>>> ed00abfe35d2327c79a26d06b26524bfa14d4665
 
     if (true) {
       Router.push('/contractForm');
