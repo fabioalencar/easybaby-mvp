@@ -1,11 +1,20 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  background: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 30px 3px;
+  header{
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 30px 3px;
+  }
+  h1{
+    font-size:25px;
+    text-align:center;
+    padding:20px 20px 0;
+    margin-bottom:0;
+    color: var(--color--secondary);
+  }
   a {
     display: flex;
     flex-direction: column;

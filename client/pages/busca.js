@@ -1,41 +1,24 @@
 import Header from '../components/Header';
-import Box from '../components/Box';
-import { fetchAPI } from '../lib/api';
-import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
+import Navigation from '../components/Navigation';
+import PageContent from '../components/PageContent';
+import Search from '../components/Search';
 import { motion } from 'framer-motion';
 import { variants } from '../components/Config/Motion';
 
-const searchClient = algoliasearch(
-  'RUUKE3CWKK',
-  '7b40c60068df98b3e37cb8bc90275500'
-);
-
-function Search() {
+function Busca() {
   return (
     <>
       <Header />
+      <Navigation />
       <motion.div initial="exit" animate="enter" exit="exit">
         <motion.div variants={variants}>
-          <h1>Busca</h1>
-
-          <InstantSearch indexName="EasyBaby" searchClient={searchClient}>
-            <SearchBox />
-            <Hits hitComponent={Box} />
-          </InstantSearch>
+          <PageContent>
+            <Search />
+          </PageContent>
         </motion.div>
       </motion.div>
     </>
   );
 }
 
-export default Search;
-
-export async function getStaticProps() {
-  const maternities = await fetchAPI(`/maternities`);
-
-  return {
-    props: { maternities: maternities },
-    revalidate: 1,
-  };
-}
+export default Busca;

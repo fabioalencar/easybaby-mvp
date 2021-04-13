@@ -3,9 +3,13 @@ import styled from 'styled-components';
 const Container = styled.div`
   background: #fff;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 8px 30px 3px;
+  position: fixed;
+  bottom:0;
+  left:0;
+  right:0;
   a {
     display: flex;
     flex-direction: column;
