@@ -7,7 +7,8 @@ const Container = styled.div`
   border-radius: 20px;
   margin-top: 20px;
   text-align: center;
-  h3 {
+  h3,
+  h2 {
     font-size: 22px;
     color: var(--color--secondary);
   }

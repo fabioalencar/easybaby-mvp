@@ -18,6 +18,7 @@ const Container = styled.nav`
     line-height: 130%;
     text-decoration: none;
     font-weight: 800;
+    color: #000;
     div {
       margin: 5px auto;
       display: block;

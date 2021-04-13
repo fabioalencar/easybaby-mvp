@@ -56,7 +56,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const maternities = await fetchAPI(`/maternities?slug=${params.slug}`);
-  console.log(maternities);
   return {
     props: { maternity: maternities[0] },
     revalidate: 1,

@@ -9,13 +9,15 @@ import Link from 'next/link';
 
 const { publicRuntimeConfig } = getConfig();
 
-export default function LoginBox() {
+export default function SignUpBox() {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
     const logininfo = {
       identifier: username,
+      email: email,
       password: password,
     };
 
@@ -55,13 +57,23 @@ export default function LoginBox() {
       <Card>
         <form method="post" action="#" align="center">
           <div>
-            <label htmlFor="email">Usuário</label>
+            <label htmlFor="email">Nome</label>
+            <input
+              id="name"
+              type="text"
+              placeholder="Insira seu nome"
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+            />
+          </div>
+          <div>
+            <label htmlFor="email">E-mail</label>
             <input
               id="email"
               type="text"
-              placeholder="Insira seu usuário"
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
+              placeholder="Insira seu e-mail"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
           </div>
           <div>
@@ -76,13 +88,13 @@ export default function LoginBox() {
           </div>
           <div className="flex w-full mt-8">
             <button type="button" onClick={() => handleLogin()}>
-              Entrar
+              Cadastrar
             </button>
           </div>
         </form>
       </Card>
-      <Link href="/cadastro">
-        <a>Ainda não tenho uma conta</a>
+      <Link href="/login">
+        <a>Já tenho uma conta</a>
       </Link>
     </Container>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Box(data) {
@@ -7,11 +6,10 @@ export default function Box(data) {
   return (
     <Link href={`/maternidade/${maternidade.slug}`}>
       <a>
-        <h2>
-          <a>{maternidade.NAME}</a>
-        </h2>
+        <h2>{maternidade.NAME}</h2>
         <p>{maternidade.CNPJ}</p>
         <p>{maternidade.WEBSITE}</p>
+        <strong>R$ {maternidade.price}</strong>
       </a>
     </Link>
   );

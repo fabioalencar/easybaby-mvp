@@ -23,7 +23,6 @@ const newContract = async () => {
   );
 
   const contractResponse = await contract.json();
-  console.log(contractResponse);
   return contractResponse;
 };
 
@@ -45,7 +44,6 @@ function Checkout({ maternidade }) {
 export default Checkout;
 
 export async function getStaticProps({ params }) {
-  console.log(params);
   const maternities = await fetchAPI(`/maternities?id=1`);
 
   return {

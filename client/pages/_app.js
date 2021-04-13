@@ -18,6 +18,22 @@ const GlobalStyle = createGlobalStyle`
     padding-bottom: 85px;
     background: var(--color--bg);
   }
+  .ais-Panel{
+    margin:20px 0 30px;
+  }
+  .ais-RheostatRangeSlider-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .rheostat .rheostat_1{
+    width: 100%;
+    margin: 0 20px;
+  }
+  .DefaultProgressBar_progressBar{
+    background: #8ad9f6;
+  }
+
 `;
 
 function MyApp({ Component, pageProps }) {

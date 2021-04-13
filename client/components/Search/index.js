@@ -1,8 +1,9 @@
 import React from 'react';
 import Container from './styles';
 import Box from '../Box';
+import RheostatRangeSlider from '../RangeSlider';
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
+import { InstantSearch, SearchBox, Hits, Panel } from 'react-instantsearch-dom';
 
 const searchClient = algoliasearch(
   'RUUKE3CWKK',
@@ -19,6 +20,9 @@ export default function Search() {
             placeholder: 'Insira sua busca...',
           }}
         />
+        <Panel header="Faixa de Preço">
+          <RheostatRangeSlider attribute="price" />
+        </Panel>
         <Hits hitComponent={Box} />
       </InstantSearch>
     </Container>
