@@ -40,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
     background:#fff;
   }
   .rdt_TableHeader{
-    display:none;
+    display:none!important;
   }
   .rdt_Table{
     padding:10px;
@@ -49,7 +49,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight:800;
   }
   
-  .logout{
+  .logout, .checkout{
     border-radius:50px;
     background: var(--color--secondary);
     color: #fff;
@@ -58,6 +58,9 @@ const GlobalStyle = createGlobalStyle`
     margin-top:20px;
     padding:10px 20px;
     font-family: Nunito, 'sans-serif';
+  }
+  .checkout{
+    background: var(--color--primary);
   }
 `;
 

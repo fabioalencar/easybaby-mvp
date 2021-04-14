@@ -1,13 +1,38 @@
 import Header from '../../../components/Header';
+import Router from 'next/router';
+import PageContent from '../../../components/PageContent';
 import getConfig from 'next/config';
 import { fetchAPI } from '../../../lib/api';
+import DataTable from 'react-data-table-component';
 
 const { publicRuntimeConfig } = getConfig();
 
+const customStyles = {
+  rows: {
+    style: {
+      minHeight: '72px', // override the row height
+    },
+  },
+  headCells: {
+    style: {
+      paddingLeft: '8px', // override the cell padding for head cells
+      paddingRight: '8px',
+    },
+  },
+  cells: {
+    style: {
+      paddingLeft: '8px', // override the cell padding for data cells
+      paddingRight: '8px',
+    },
+  },
+};
+
 const newContract = async () => {
   const contractInfo = {
-    name: 'teste',
+    name: 'Contrato teste',
     MATERNITY_SIGNED: false,
+    users_permissions_user: { id: 2 },
+    plan: { id: 1 },
   };
 
   const contract = await fetch(
@@ -23,20 +48,57 @@ const newContract = async () => {
   );
 
   const contractResponse = await contract.json();
-  return contractResponse;
+  if (contractResponse) {
+    Router.push('/maternidade/checkout/sucesso');
+    return contractResponse;
+  } else {
+    alert('Erro');
+  }
 };
 
 function Checkout({ maternidade }) {
+  const columns = [
+    {
+      name: 'Maternidade',
+      selector: 'NAME',
+      sortable: true,
+    },
+    {
+      name: 'Plano',
+      selector: 'plans[0].TITLE',
+      sortable: true,
+    },
+    {
+      name: 'Preço',
+      selector: 'plans[0].VALUE',
+      sortable: true,
+    },
+  ];
   return (
     <>
       <Header />
-      <h1>Checkout</h1>
-      <p>{maternidade.NAME}</p>
-      <p>{maternidade.plans[0].TITLE}</p>
-      <p>{maternidade.plans[0].VALUE}</p>
-      <button type="button" onClick={() => newContract()}>
-        Enviar
-      </button>
+      <PageContent>
+        <h1>Checkout</h1>
+        <br />
+        <DataTable
+          columns={columns}
+          data={[maternidade]}
+          customStyles={customStyles}
+        />
+        <br />
+        <p>
+          <strong>Importante:</strong> Ao finalizar a contratação a maternidade
+          entrará em contato para enviar o contrato assinado e um link para
+          pagamento.
+        </p>
+        <button
+          type="button"
+          className="checkout"
+          onClick={() => newContract()}
+        >
+          Finalizar contratação
+        </button>
+      </PageContent>
     </>
   );
 }
