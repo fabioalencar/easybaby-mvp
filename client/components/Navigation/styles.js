@@ -10,6 +10,7 @@ const Container = styled.nav`
   right: 0;
   padding: 12px 50px;
   border-top: 1px solid #d8d8d8;
+  z-index: 2;
   a {
     display: flex;
     flex-direction: column;

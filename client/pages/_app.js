@@ -62,6 +62,25 @@ const GlobalStyle = createGlobalStyle`
   .checkout{
     background: var(--color--primary);
   }
+  .home-content{
+    text-align:center;
+    color:var(--color--secondary);
+    padding: 20px;
+    background:url(bg-pattern.png);
+  }
+  .home-content h3{
+    font-size: 22px;
+    padding:20px;
+    margin-top:0;
+  }
+  .home-content h3 strong{
+    color:var(--color--primary);
+  }
+  .home-content .dream-text{
+    font-size:20px;
+    margin-bottom:60px;
+    display:block;
+  }
 `;
 
 const redirectUser = (ctx, location) => {
