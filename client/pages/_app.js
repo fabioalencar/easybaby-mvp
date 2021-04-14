@@ -134,7 +134,7 @@ const { publicRuntimeConfig } = getConfig();
 
 MyApp.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {};
-  const cookie = parseCookies(ctx).user;
+  const cookie = parseCookies(ctx).user_client;
   const { jwt } = cookie != undefined ? JSON.parse(cookie) : false;
 
   if (Component.getInitialProps) {

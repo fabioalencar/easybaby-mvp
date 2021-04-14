@@ -36,7 +36,7 @@ export default function LoginBox() {
     if (loginResponse.jwt) {
       const cookieToken = setCookie(
         null,
-        'user',
+        'user_client',
         JSON.stringify(loginResponse),
         {
           maxAge: 30 * 24 * 60 * 60,

@@ -91,7 +91,7 @@ export default Dashboard;
 const { publicRuntimeConfig } = getConfig();
 
 export async function getServerSideProps(ctx) {
-  const cookie = parseCookies(ctx).user;
+  const cookie = parseCookies(ctx).user_client;
   const userData = cookie != undefined ? JSON.parse(cookie) : false;
   const { jwt, user } = userData;
 
