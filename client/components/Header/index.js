@@ -2,8 +2,11 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Container from './styles';
+import Avatar from '../Avatar';
 
-export default function Header() {
+export default function Header({ user }) {
+  const avatarUrl = user ? user.user.avatar.url : null;
+
   return (
     <Container>
       <Link href="/busca">
@@ -22,18 +25,21 @@ export default function Header() {
           <Image src="/easy-baby.svg" alt="Easy Baby" width={100} height={72} />
         </a>
       </Link>
-      <Link href="/login">
-        <a>
-          <Image
-            src="/icon-user.png"
-            alt="Entrar"
-            width={30}
-            height={30}
-            layout="fixed"
-          />
-          Entrar
-        </a>
-      </Link>
+      {user && <Avatar url={avatarUrl} />}
+      {!user && (
+        <Link href="/login">
+          <a>
+            <Image
+              src="/icon-user.png"
+              alt="Entrar"
+              width={30}
+              height={30}
+              layout="fixed"
+            />
+            Entrar
+          </a>
+        </Link>
+      )}
     </Container>
   );
 }

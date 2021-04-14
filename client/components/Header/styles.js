@@ -15,6 +15,7 @@ const Container = styled.div`
     text-decoration: none;
     font-weight: 800;
     min-width:42px;
+    color: #000;
     div {
       margin: 5px auto;
       display: block;

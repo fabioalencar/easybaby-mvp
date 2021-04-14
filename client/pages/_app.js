@@ -1,6 +1,9 @@
 import Head from 'next/head';
+import getConfig from 'next/config';
+import Router from 'next/router';
 import { AnimatePresence } from 'framer-motion';
 import { createGlobalStyle } from 'styled-components';
+import { parseCookies } from 'nookies';
 
 const GlobalStyle = createGlobalStyle`
   html{
@@ -26,15 +29,46 @@ const GlobalStyle = createGlobalStyle`
     justify-content: space-between;
     align-items: center;
   }
-  .rheostat .rheostat_1{
+  .rheostat{
     width: 100%;
     margin: 0 20px;
   }
   .DefaultProgressBar_progressBar{
     background: #8ad9f6;
   }
-
+  .white{
+    background:#fff;
+  }
+  .rdt_TableHeader{
+    display:none;
+  }
+  .rdt_Table{
+    padding:10px;
+  }
+  .rdt_TableCol_Sortable{
+    font-weight:800;
+  }
+  
+  .logout{
+    border-radius:50px;
+    background: var(--color--secondary);
+    color: #fff;
+    border:none;
+    font-size:20px;
+    margin-top:20px;
+    padding:10px 20px;
+    font-family: Nunito, 'sans-serif';
+  }
 `;
+
+const redirectUser = (ctx, location) => {
+  if (ctx.req) {
+    ctx.res.writeHead(302, { Location: location });
+    ctx.res.end();
+  } else {
+    Router.push(location);
+  }
+};
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -73,3 +107,30 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+
+const { publicRuntimeConfig } = getConfig();
+
+MyApp.getInitialProps = async ({ Component, ctx }) => {
+  let pageProps = {};
+  const cookie = parseCookies(ctx).user;
+  const { jwt } = cookie != undefined ? JSON.parse(cookie) : false;
+
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+
+  if (!jwt && ctx.pathname === '/dashboard') {
+    redirectUser(ctx, '/');
+  }
+
+  if (
+    (jwt && ctx.pathname === '/login') ||
+    (jwt && ctx.pathname === '/cadastro')
+  ) {
+    redirectUser(ctx, '/dashboard');
+  }
+
+  return {
+    pageProps,
+  };
+};

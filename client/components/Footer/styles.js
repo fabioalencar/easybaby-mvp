@@ -10,6 +10,7 @@ const Container = styled.div`
   bottom:0;
   left:0;
   right:0;
+  border-top: 1px solid #d8d8d8;
   a {
     display: flex;
     flex-direction: column;
